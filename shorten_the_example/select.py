@@ -8,6 +8,7 @@
 import openpyxl
 import json
 
+
 INPUT = 'input.xlsx'
 OUTPUT = 'output_shorten.xlsx'
 LOG = 'deleted.xlsx'
@@ -15,7 +16,8 @@ LOG = 'deleted.xlsx'
 if __name__ == "__main__":
     data = openpyxl.load_workbook(INPUT)
     sheet = data.worksheets[0]
-    
+    sheet.title = 'shorten senteces'
+
     log = openpyxl.Workbook()
     deleted_sheet = log.active
     deleted_sheet.title = 'deleted sentences'
