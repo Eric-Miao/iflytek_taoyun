@@ -1,4 +1,4 @@
-  <?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <dictionary>
   <Entry>
     <Head>
@@ -38770,7 +38770,7 @@
     </Sense>
 	<PIC>
 	 <HEADING>BINS 垃圾箱</HEADING>
-	 <PICCAL>ldoce_025_g<</PICCAL>	
+	 <!-- <PICCAL>ldoce_025_g<</PICCAL>	 -->
 	 <PICCONTENT>pedal bin <i>BrE</i>【英】脚踏式垃圾桶；recycling bin/box 废物回收箱；wastepaper basket <i>BrE</i>【英】/wastebasket <i>AmE</i>【美】废纸篓；dustbin <i>BrE</i>【英】/garbage can <i>AmE</i>【美】垃圾桶；wheelie bin <i>BrE</i>【英】大型轮式垃圾箱；litter bin <i>BrE</i>【英】/trash can <i>AmE</i>【美】垃圾箱</PICCONTENT>	  
     </PIC>
   </Entry>

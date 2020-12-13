@@ -1,0 +1,245 @@
+<!ELEMENT dictionary	(Entry*) ><!-- 词典根节点 -->
+
+<!ELEMENT Entry	(PICCAL?,Head,(Sense|SpokenSect|F2NBox|Tail|PhrVbEntry)*,PIC?,PICCAL?) ><!-- 词条节点 -->
+	<!ATTLIST Entry	id CDATA #IMPLIED
+>
+
+<!ELEMENT PhrVbEntry	(PICCAL?, Head, POS*, (Sense|Tail|F2NBox)*) ><!-- 词条短语动词节点 -->
+	<!ATTLIST PhrVbEntry	id CDATA #IMPLIED>
+
+<!ELEMENT Head	((HWD|PHRVBHWD|HYPHENATION|HOMNUM|FREQ|AC|PronCodes|Variant|AmEVariant|BrEVariant|POS|Inflections|GRAM|GRAMTRAN|GEO|REGISTERLAB|LABELTRAN|LINKWORD)*,SEM?) ><!-- 词条头部节点 -->
+
+<!ELEMENT PronCodes	((PRON?,PRONKK?)|AMEVARPRON|STRONG|LABELTRAN|REGISTERLAB)*><!-- 音标节点 -->
+
+<!ELEMENT Variant	(LINKWORD|LEXVAR|ORTHVAR|ABBR|GRAM|GRAMTRAN|GEO|REGISTERLAB|PronCodes|LABELTRAN|TRAN)*><!-- 变体节点 -->
+
+<!ELEMENT AmEVariant	(LINKWORD|LEXVAR|ORTHVAR|GEO|REGISTERLAB|PronCodes)* ><!-- 美式变体 -->
+
+<!ELEMENT BrEVariant	(LINKWORD|LEXVAR|ORTHVAR|GEO|REGISTERLAB|PronCodes)* ><!-- 英式变体 -->
+
+<!ELEMENT Inflections	((LINKWORD|PLURALFORM|PASTTENSE|PASTPART|PTandPP|PTandPPX|PRESPART|PRESPARTX|T3PERSSING|T3PERSSINGX|COMP|SUPERL|AmEVariant|BrEVariant|Variant),PronCodes?,(GEO|REGISTERLAB|LABELTRAN)*)* ><!-- 词形变化节点 -->
+
+<!ELEMENT Sense	(LEXUNIT|POS|LINKWORD|GRAM|GRAMTRAN|Variant|AmEVariant|BrEVariant|Inflections|PronCodes|Subsense|SIGNPOST|SIGNTRAN|GEO|REGISTERLAB|ABBR|FULLFORM|DEF|TRAN|SYN|OPP|RELATEDWD|AMEQUIV|BREQUIV|GramExa|EXAMPLE|GEO|EXAMPLETRAN|ColloExa|Crossref|Hint|HINTTRAN|F2NBox|GramBox|Thesref|LABELTRAN|Tail)* ><!-- 释义节点 -->
+	<!ATTLIST Sense	id CDATA #IMPLIED>
+
+<!ELEMENT Subsense	(LEXUNIT|LINKWORD|GRAM|GRAMTRAN|Variant|AmEVariant|BrEVariant|Inflections|PronCodes|SIGNPOST|SIGNTRAN|GEO|REGISTERLAB|ABBR|FULLFORM|DEF|TRAN|SYN|OPP|RELATEDWD|AMEQUIV|BREQUIV|GramExa|EXAMPLE|GEO|EXAMPLETRAN|ColloExa|Crossref|Hint|HINTTRAN|F2NBox|GramBox|Thesref|LABELTRAN|Tail)* ><!-- 子释义节点 -->
+
+<!ELEMENT GramExa	(GRAM|LINKWORD|PROPFORM|PROPFORMPREP|COLLOTRAN|TRAN|GEO|REGISTERLAB|LABELTRAN|EXAMPLE|EXAMPLETRAN|GLOSS|PROPFORM|Thesref)*><!-- 语法用法举例 -->
+
+<!ELEMENT Tail	(RELATEDWD|Hint|HINTTRAN|Crossref|RunOn|ColloBox|ThesBox|F2NBox|GramBox|Thesref|TailContent)* ><!-- 尾随注释框 -->
+
+<!ELEMENT RunOn	(DERIV|Variant|AmEVariant|BrEVariant|PronCodes|POS|GEO|REGISTERLAB|GramExa|LABELTRAN|GRAM|GRAMTRAN|EXAMPLE|EXAMPLETRAN)* ><!-- 派生词节点 -->
+	<!ATTLIST RunOn	id CDATA #IMPLIED>
+
+<!ELEMENT ColloExa	(COLLO|COLLOTRAN|GEO|REGISTERLAB|LABELTRAN|LINKWORD|GLOSS|(EXAMPLE,GEO?,EXAMPLETRAN?))* ><!-- 词语搭配节点 -->
+
+<!ELEMENT ColloBox	(HEADING*, Section*, ErrorBox*) ><!-- 词语搭配框 -->
+
+<!ELEMENT ThesBox	(HEADING*, (Section|ThesColloBox)+) ><!-- 词语辨析框 -->
+
+<!ELEMENT F2NBox (HEADING|EXPL|TRAN|(GOODEXA,EXAMPLETRAN?)|LABELTRAN|EXAMPLE|REGISTERLAB|GEO|EXAMPLETRAN|BADEXA|REGISTERLAB)*><!-- 语体语法框 -->
+
+<!ELEMENT Section	((REGISTERLAB?, SECHEADING,HEADTRAN?)?, (Collocate|Exponent|Crossref)*) ><!-- 词语辨析或搭配部分分段节点 -->
+
+<!ELEMENT Collocate	( COLLOCTRAN|Variant|BrEVariant|AmEVariant|COLLOC|REGISTERLAB|GEO|LABELTRAN|COLLGLOSS|EXAMPLE|EXAMPLETRAN|GramExa)*><!-- 词语搭配 -->
+
+<!ELEMENT Exponent	((((EXP|EXPTRAN|COLLOTRAN|GramExa|POS|GRAM|GRAMTRAN|REGISTERLAB|GEO|LABELTRAN|(DEF?,TRAN?)|PronCodes|Variant|BrEVariant|AmEVariant|THESPROPFORM|EXAMPLE|EXAMPLETRAN)*)|COLLORANGE?))><!-- 具体词语或词语搭配节点 -->
+
+<!ELEMENT ErrorBox	(SECHEADING?,(Error?,HINTTRAN?)+)><!-- 常见错误框或注释 -->
+
+<!ELEMENT Error	(#PCDATA|BADCOLLO|GOODCOLLO)*><!-- 错误 -->
+
+<!ELEMENT COLLOC	 (#PCDATA|GEO|i|LABELTRAN|REGISTERLAB)*><!-- 词语固定搭配 -->
+
+<!ELEMENT ThesColloBox	((SECHEADING,HEADTRAN?)?,Exponent*)><!-- 辨析搭配框 -->
+
+<!ELEMENT COLLORANGE	(#PCDATA)><!-- 搭配范围 -->
+
+<!ELEMENT THESPROPFORM	(#PCDATA|GLOSS)*><!-- 词语辨析搭配形式 -->
+
+<!ELEMENT BADCOLLO (#PCDATA)  ><!-- 不好的搭配形式 -->
+
+<!ELEMENT HEADING (#PCDATA|b|GEO|LABELTRAN)*  ><!-- 框体头注释 -->
+
+<!ELEMENT SECHEADING (#PCDATA|GEO|LABELTRAN)*  ><!-- 框体部分注释 -->
+
+<!ELEMENT GOODCOLLO (#PCDATA)  ><!-- 常用搭配 -->
+
+<!ELEMENT EXPL (#PCDATA|GEO|WARNING|EXPR|PronCodes|EXAMPLE|EXAMPLETRAN)*><!-- 注释原文 -->
+
+<!ELEMENT EXPR (#PCDATA)><!-- 注释原文中重点标黑体部分 -->
+
+<!ELEMENT EXP (#PCDATA|GEO|i|LABELTRAN)*  ><!-- 词语辨析词头 -->
+
+<!ELEMENT BADEXA (#PCDATA|COLLOINEXA)*><!-- 不好的例证 -->
+
+<!ELEMENT GOODEXA (#PCDATA|COLLOINEXA)*><!-- 好的例证 -->
+
+<!ELEMENT COLLEXA		(#PCDATA)*><!-- 搭配例证 -->
+
+<!ELEMENT THESEXA		(#PCDATA|GLOSS|COLLOINEXA)*><!-- 辨析例证  -->
+
+<!ELEMENT COLLGLOSS		(#PCDATA)*><!-- 搭配注释 -->
+
+<!ELEMENT Crossref		(CROSSREFTYPE|Crossrefto|GEO|REGISTERLAB)* ><!-- 参考，参见 -->
+
+<!ELEMENT Thesref		(Crossrefto) ><!-- 同义参考 -->
+
+<!ELEMENT NonDV	(#PCDATA|REFHWD|REFHOMNUM|REFSENSENUM|GLOSS|SUFFIX|GEO|LABELTRAN|REGISTERLAB)* ><!-- 参见本词典收录词 -->
+
+<!ELEMENT Crossrefto	(REFLEX|REFHWD|SUFFIX|REFHOMNUM|REFSENSENUM|LABELTRAN|REGISTERLAB)* ><!-- 参见到... -->
+	<!ATTLIST Crossrefto	targetid CDATA #IMPLIED>
+
+<!ELEMENT DEF	(#PCDATA|NonDV|FULLFORM|GLOSS|PronCodes|DATE|BOOKFILM|DEFBOLD|b|GEO|i|LABELTRAN|REGISTERLAB)* ><!-- 定义 -->
+
+<!ELEMENT EXAMPLE	(#PCDATA|GLOSS|COLLOINEXA|GEO|LABELTRAN|REGISTERLAB|NonDV|b)* ><!-- 例证 -->
+
+<!ELEMENT GLOSS	(#PCDATA|NonDV)* ><!-- 重点注意，黑体 -->
+
+<!ELEMENT GRAM	(#PCDATA|GEO|LABELTRAN|REGISTERLAB|GRAMTRAN|b|NonDV|i)* ><!-- 语法 -->
+
+<!ELEMENT LEXUNIT	(#PCDATA|OBJECT|GEO|i|LABELTRAN)* ><!-- 搭配组件 -->
+
+<!ELEMENT LEXVAR	(#PCDATA|OBJECT|GEO|i|LABELTRAN)* ><!-- 搭配变体 -->
+
+<!ELEMENT PHRVBHWD	(#PCDATA|OBJECT|GEO|LABELTRAN)* ><!-- 短语词头 -->
+
+<!ELEMENT Hint	(#PCDATA|HINTBOLD|HINTITALIC|PronCodes|Crossref)* ><!-- 提示 -->
+
+<!ELEMENT AC	(#PCDATA) ><!-- 学术词汇 -->
+
+<!ELEMENT COLLO	(#PCDATA) ><!-- 搭配 -->
+
+<!ELEMENT CROSSREFTYPE	(#PCDATA) ><!-- 参见类型 -->
+
+<!ELEMENT FREQ	(#PCDATA) ><!-- 词条使用频率 -->
+
+<!ELEMENT HINTBOLD	(#PCDATA) ><!-- 黑体提示 -->
+
+<!ELEMENT HINTITALIC	(#PCDATA) ><!-- 斜体提示 -->
+
+<!ELEMENT DEFBOLD	(#PCDATA) ><!-- 黑体定义 -->
+
+<!ELEMENT HOMNUM	(#PCDATA) ><!-- 词类 -->
+
+<!ELEMENT HWD	(#PCDATA|GEO|i|LABELTRAN)* ><!-- 查询词词头 -->
+
+<!ELEMENT HYPHENATION	(#PCDATA|GEO|i|LABELTRAN)* ><!-- 单词断字 -->
+
+<!ELEMENT GEO	(#PCDATA|LABELTRAN)* ><!-- 地域标签 -->
+
+<!ELEMENT REGISTERLAB	(#PCDATA|b|NonDV|GLOSS|GEO|LABELTRAN)* ><!-- 语体学科标签 -->
+
+<!ELEMENT STRONG	(#PCDATA|LABELTRAN)* ><!-- 强读 -->
+
+<!ELEMENT ORTHVAR	(#PCDATA|GEO|LABELTRAN|i)* ><!-- 参见变体 -->
+
+<!ELEMENT PICCAL	(#PCDATA) ><!-- 图片链接 -->
+
+<!ELEMENT SIGNPOST	(#PCDATA|b)* ><!-- 导航词 -->
+
+<!ELEMENT POS	(#PCDATA|GEO|LABELTRAN)* ><!-- 词性 -->
+
+<!ELEMENT PRON	(#PCDATA|i|LABELTRAN)* ><!-- 发音 -->
+
+<!ELEMENT AMEVARPRON	(#PCDATA|i)* ><!-- 美式变体发音 -->
+
+<!ELEMENT PROPFORM	(#PCDATA) ><!-- 语法用法 -->
+
+<!ELEMENT PROPFORMPREP	(#PCDATA|GEO|LABELTRAN)* ><!-- 语法用法搭配 -->
+
+<!ELEMENT REFHWD	(#PCDATA|LABELTRAN)* ><!-- 参见查询词头 -->
+
+<!ELEMENT REFHOMNUM	(#PCDATA) ><!-- 参见词类 -->
+
+<!ELEMENT REFSENSENUM	(#PCDATA) ><!-- 参见释义 -->
+
+<!ELEMENT OBJECT	(#PCDATA) ><!-- 宾语 -->
+
+<!ELEMENT LINKWORD	(#PCDATA|LABELTRAN|GEO|b)* ><!-- 连接词 -->
+
+<!ELEMENT SUFFIX	(#PCDATA|b|i|GLOSS|GEO|LABELTRAN)* ><!-- 尾随部分 -->
+
+<!ELEMENT DERIV	(#PCDATA|b|GLOSS|NonDV|i|GEO|LABELTRAN)* ><!-- 派生词词头 -->
+
+<!ELEMENT PLURALFORM	(#PCDATA|GEO|LABELTRAN)* ><!-- 复数形式 -->
+
+<!ELEMENT PASTTENSE	(#PCDATA) ><!-- 过去式 -->
+
+<!ELEMENT PASTPART	(#PCDATA) ><!-- 过去分词 -->
+
+<!ELEMENT PTandPP	(#PCDATA|GEO|LABELTRAN)* ><!-- 过去式和过去分词 -->
+
+<!ELEMENT PTandPPX	(#PCDATA) ><!-- 过去式和过去分词 -->
+
+<!ELEMENT PRESPART	(#PCDATA|GEO|LABELTRAN)* ><!-- 现在进行时 -->
+
+<!ELEMENT PRESPARTX	(#PCDATA) ><!-- 现在进行时 -->
+
+<!ELEMENT T3PERSSING	(#PCDATA) ><!-- 第三人称单数形式 -->
+
+<!ELEMENT T3PERSSINGX	(#PCDATA) ><!-- 第三人称单数形式 -->
+
+<!ELEMENT COMP	(#PCDATA) ><!-- 比较级 -->
+
+<!ELEMENT SUPERL	(#PCDATA) ><!-- 最高级 -->
+
+<!ELEMENT FULLFORM	(#PCDATA) ><!-- 全称 -->
+
+<!ELEMENT ABBR	(#PCDATA|b|GLOSS|NonDV|GEO|LABELTRAN)* ><!-- 缩写 -->
+
+<!ELEMENT SYN	(#PCDATA) ><!-- 同义词 -->
+
+<!ELEMENT OPP	(#PCDATA) ><!-- 反义词 -->
+
+<!ELEMENT RELATEDWD	(#PCDATA|GEO|LABELTRAN|REGISTERLAB)* ><!-- 相关词 -->
+
+<!ELEMENT AMEQUIV	(#PCDATA) ><!-- 美式用法 -->
+
+<!ELEMENT BREQUIV	(#PCDATA) ><!-- 英式用法 -->
+
+<!ELEMENT COLLOINEXA	(#PCDATA) ><!-- 参考固定搭配 -->
+
+<!ELEMENT SpokenSect	(Sense*) ><!-- 口语短语 -->
+
+<!ELEMENT DATE	(#PCDATA) ><!-- 日期 -->
+
+<!ELEMENT BOOKFILM	(#PCDATA) ><!-- 书名 -->
+
+<!ELEMENT REFLEX	(#PCDATA) ><!-- 参见提示 -->
+
+<!ELEMENT PIC	(PICCAL, PICCONTENT?) ><!-- 图片 -->
+
+<!ELEMENT PICCONTENT	(#PCDATA|GEO|LABELTRAN)* ><!-- 图片文字内容 -->
+
+<!ELEMENT KEY	EMPTY ><!-- 关键字节点 -->
+
+<!ELEMENT WARNING	EMPTY ><!-- 警告 -->
+
+<!ELEMENT GramBox ((HEADING?,(EXPL|TRAN|(EXAMPLE,EXAMPLETRAN?))*)+) ><!-- 语法框 -->
+
+<!-- added for Chinese -->
+
+<!ELEMENT SIGNTRAN	(#PCDATA|GEO|b|LABELTRAN)* ><!-- 导航词译文 -->
+
+<!ELEMENT TRAN	(#PCDATA|b|sub|sup|PRON|i|NonDV|GLOSS|GEO|LABELTRAN)* ><!-- 译文 -->
+<!ATTLIST TRAN replace (0|1) #IMPLIED>
+
+<!ELEMENT EXAMPLETRAN	(#PCDATA|sub|sup|b|GLOSS|GEO|i|LABELTRAN)* ><!-- 例证译文 -->
+<!ELEMENT COLLOTRAN	(#PCDATA|LABELTRAN)* ><!-- 搭配译文 -->
+<!ELEMENT COLLOCTRAN	(#PCDATA|LABELTRAN)* ><!-- 搭配词译文 -->
+<!ELEMENT EXPTRAN	(#PCDATA) ><!-- 辨析词译文 -->
+<!ELEMENT GRAMTRAN	(#PCDATA|GEO|LABELTRAN)* ><!-- 语法译文 -->
+<!ELEMENT LINKTRAN	(#PCDATA) ><!-- 连接词译文 -->
+<!ELEMENT LABELTRAN	(#PCDATA|GEO|NonDV|LABELTRAN|b)* ><!-- 标签译文 -->
+<!ELEMENT HEADTRAN	(#PCDATA) ><!-- 头部译文 -->
+<!ELEMENT HINTTRAN	(#PCDATA|b|i|PronCodes|GLOSS)* ><!-- 提示译文 -->
+<!ELEMENT PRONKK		(#PCDATA|sc|i)* ><!-- 发音KK -->
+<!ELEMENT TailContent	(#PCDATA|i|GEO|LABELTRAN)* ><!-- 使用频率图解说明文字 -->
+
+<!ELEMENT KKPRON	(#PCDATA|sc)* ><!-- KK发音 -->
+<!ELEMENT sub	(#PCDATA) ><!-- 下标 -->
+<!ELEMENT sup	(#PCDATA) ><!-- 上标 -->
+<!ELEMENT b	(#PCDATA|GEO|i)* ><!-- 黑体 -->
+<!ELEMENT i	(#PCDATA) ><!-- 斜体 -->
+<!ELEMENT sc	(#PCDATA) ><!-- 特殊发音 -->
